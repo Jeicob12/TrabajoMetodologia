@@ -1,3 +1,4 @@
+import {v4} from 'uuid';
 import { Nullable } from "../valueObjects/Nullable";
 
 export class Visitor {
@@ -14,5 +15,16 @@ export class Visitor {
         this.id = id;
         this.ip = ip;
         this.nickName = nickName;
+    }
+
+    public static create(ip: string, nickName: string): Visitor {
+
+        const id = v4();
+        const visitor = new Visitor(id, ip, nickName);
+        visitor.ip = ip;
+        visitor.nickName = nickName;
+    
+        // Add record event for open/closed principle
+        return visitor;
     }
 }

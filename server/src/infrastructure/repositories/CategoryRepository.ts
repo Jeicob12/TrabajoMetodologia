@@ -3,34 +3,31 @@ import Category  from "../../domain/entities/Category";
 
 class CategoryRepository{
 
-    private categorys : Category[];
+    private categories : Category[];
 
     public constructor() {
-        this.categorys = [];
+        this.categories = [];
       }
 
-      public async save (category : Category) : Promise<void>
+      public async save (categories : Category) : Promise<void>
       {
-        const saveCategory = this.categorys.find(c => c.getId() === category.getId());
+        const saveCategory = this.categories.find(c => c.getId() === categories.getId());
 
         if(saveCategory)
         {
-          this.categorys.splice(this.categorys.indexOf(saveCategory),1);
+          this.categories.splice(this.categories.indexOf(saveCategory),1);
         }
-        this.categorys.push(category);
+        this.categories.push(categories);
      };
 
      public async findOneById(id: string): Promise<Category | null> {
-      const category = this.categorys.find(c => c.getId() === id);
+      const category = this.categories.find(c => c.getId() === id);
 
       return category ? category : null;
      }
 
-     public async getAll(): Promise<Category[] | null> {
-      if (this.categorys.length === 0) {
-        return null;
-      }
-      return this.categorys;
+     public async getAll(): Promise<Category[]> {
+      return this.categories;
 
      };
 

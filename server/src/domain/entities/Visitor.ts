@@ -7,8 +7,8 @@ export class Visitor {
     private nickName: string;
 
 
-    private constructor(
-        id: string,
+    public constructor(
+        id: string ,
         ip: string,
         nickName: string,
     ) {
@@ -21,10 +21,12 @@ export class Visitor {
 
         const id = v4();
         const visitor = new Visitor(id, ip, nickName);
-        visitor.ip = ip;
-        visitor.nickName = nickName;
     
         // Add record event for open/closed principle
         return visitor;
+    }
+
+    public getId(): string {
+        return this.id;
     }
 }

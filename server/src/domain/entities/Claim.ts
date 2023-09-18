@@ -1,5 +1,5 @@
 import { Visitor } from './Visitor';
-import { Category } from './Category';
+import Category  from './Category';
 import {v4} from 'uuid';
 import {Nullable} from "../valueObjects/Nullable";
 
@@ -39,15 +39,12 @@ export class Claim{
 
         const id = v4();
         const claim = new Claim(id, owner, tittle, desciption, category, location, createdAt,cloneOf );
-        claim.owner = owner;
-        claim.tittle = tittle;
-        claim.desciption = desciption;
-        claim.category = category;
-        claim.location = location;
-        claim.createdAt = createdAt
-        claim.cloneOf = cloneOf
     
         // Add record event for open/closed principle
         return claim;
+    }
+
+    public getId(): string {
+        return this.id;
     }
 }

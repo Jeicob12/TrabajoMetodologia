@@ -1,27 +1,26 @@
-import { Visitor } from "../../domain/entities/Visitor"
+import { Visitor } from '../../domain/entities/Visitor'
 
-class VisitorRepository{
+class VisitorRepository {
+  private visitors : Visitor[]
 
-    private visitors : Visitor[];
+  constructor () {
+    this.visitors = []
+  }
 
-    constructor() {
-        this.visitors = [];
-      }
+  public async save (visitors : Visitor) : Promise<void> {
+    const saveCategory = this.visitors.find(c => c.getId() === visitors.getId())
 
-      public async save (visitors : Visitor) : Promise<void>
-      {
-        const saveCategory = this.visitors.find(c => c.getId() === visitors.getId());
+    if (saveCategory) {
+      this.visitors.splice(this.visitors.indexOf(saveCategory), 1)
+    }
+    this.visitors.push(visitors)
+  };
 
-        if(saveCategory)
-        {
-          this.visitors.splice(this.visitors.indexOf(saveCategory),1);
-        }
-        this.visitors.push(visitors);
-     };
+  public async findOneById (id: string): Promise<Visitor | null> {
+    const visitor = this.visitors.find(c => c.getId() === id)
 
-     public async findOneById(id: string): Promise<Visitor | null> {
-      const visitor = this.visitors.find(c => c.getId() === id);
-
-      return visitor ? visitor : null;
-     }
+    return visitor || null
+  }
 }
+
+export default VisitorRepository

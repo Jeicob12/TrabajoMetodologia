@@ -1,35 +1,29 @@
-import Category  from "../../domain/entities/Category";
+import { Category } from '../../domain/entities/Category'
 
+class CategoryRepository {
+  private categories : Category[]
 
-class CategoryRepository{
+  public constructor () {
+    this.categories = []
+  }
 
-    private categories : Category[];
+  public async save (categories : Category) : Promise<void> {
+    const saveCategory = this.categories.find(c => c.getId() === categories.getId())
 
-    public constructor() {
-        this.categories = [];
-      }
+    if (saveCategory) {
+      this.categories.splice(this.categories.indexOf(saveCategory), 1)
+    }
+    this.categories.push(categories)
+  };
 
-      public async save (categories : Category) : Promise<void>
-      {
-        const saveCategory = this.categories.find(c => c.getId() === categories.getId());
+  public async findOneById (id: string): Promise<Category | null> {
+    const category = this.categories.find(c => c.getId() === id)
 
-        if(saveCategory)
-        {
-          this.categories.splice(this.categories.indexOf(saveCategory),1);
-        }
-        this.categories.push(categories);
-     };
+    return category || null
+  }
 
-     public async findOneById(id: string): Promise<Category | null> {
-      const category = this.categories.find(c => c.getId() === id);
-
-      return category ? category : null;
-     }
-
-     public async getAll(): Promise<Category[]> {
-      return this.categories;
-
-     };
-
-
+  public async getAll (): Promise<Category[]> {
+    return this.categories
+  };
 }
+export default CategoryRepository

@@ -11,6 +11,7 @@ export class Claim {
   private category: Category
   private location: string
   private createdAt: Date
+  // eslint-disable-next-line no-use-before-define
   private cloneOf?: Claim
 
   private constructor (

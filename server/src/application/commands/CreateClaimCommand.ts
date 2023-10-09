@@ -9,6 +9,7 @@ class CreateClaimCommand {
   private readonly location: string
   private readonly createdAt: Date
   private readonly cloneOf: Claim
+  private readonly pin : string
 
   public constructor (
     id: string,
@@ -18,7 +19,8 @@ class CreateClaimCommand {
     cloneOf: Claim,
     description: string,
     category: string,
-    location: string
+    location: string,
+    pin : string
 
   ) {
 
@@ -30,13 +32,17 @@ class CreateClaimCommand {
     this.description = description
     this.category = category
     this.location = location
+    this.pin = pin
+  }
+  public getPin() : string {
+    return this.pin
   }
 
   public getId (): string {
     return this.id
   }
 
-  public getOwner (): string {
+  public getOwnerId (): string {
     return this.owner
   }
 

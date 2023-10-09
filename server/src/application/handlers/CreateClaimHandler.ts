@@ -26,18 +26,20 @@ class CreateClaimHandler {
   }
 
   public async execute (command: CreateClaimCommand): Promise<void> {
-    if (!command.getOwner().includes(command.getId())) {
-      throw new Error('Owner must exists')
-    }
 
-    let visitor = await this.visitorRepository.findOneById(command.getOwner());
+    let visitor = await this.visitorRepository.findOneById(command.getOwnerId());
 
     if (!visitor)
     {
       throw new Error('visitor not found')
     }
 
-    let category = await this.categoryRepository.findOneById(command.getOwner());
+    if(!visitor.pinMatch(command.getPin()))
+    {
+      throw new Error('the pin does not match')
+    }
+
+    let category = await this.categoryRepository.findOneById(command.getCategory());
     if (!category)
     {
       throw new Error('category not found')

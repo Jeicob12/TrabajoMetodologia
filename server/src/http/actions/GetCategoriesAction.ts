@@ -15,7 +15,7 @@ class GetCategoriesAction {
       return res.status(201).json(
         { message: 'Categories get successfully' }
       )
-    } catch (error) {
+    } catch (error : any) {
       res.status(400).json(
         { message: error.message }
       )

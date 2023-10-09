@@ -1,3 +1,5 @@
+import { Claim } from "domain/entities/Claim"
+
 class CreateClaimCommand {
   private readonly id: string
   private readonly owner: string
@@ -6,22 +8,19 @@ class CreateClaimCommand {
   private readonly category: string
   private readonly location: string
   private readonly createdAt: Date
-  private readonly cloneOf: Date
+  private readonly cloneOf: Claim
 
   public constructor (
     id: string,
     owner: string,
     tittle: string,
     createdAt: Date,
-    cloneOf: Date,
+    cloneOf: Claim,
     description: string,
     category: string,
     location: string
 
   ) {
-    if (createdAt.getTime() > cloneOf.getTime()) {
-      throw new Error('(createdAt) date must be before (cloneOf) date')
-    }
 
     this.id = id
     this.owner = owner
@@ -49,7 +48,7 @@ class CreateClaimCommand {
     return this.createdAt
   }
 
-  public getCloneOf (): Date {
+  public getCloneOf (): Claim {
     return this.cloneOf
   }
 

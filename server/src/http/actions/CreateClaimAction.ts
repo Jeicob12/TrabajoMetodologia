@@ -21,7 +21,7 @@ class CreateClaimAction {
       return res.status(201).json(
         { message: 'Claim created successfully' }
       )
-    } catch (error) {
+    } catch (error : any) {
       res.status(400).json(
         { message: error.message }
       )

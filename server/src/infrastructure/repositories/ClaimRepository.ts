@@ -23,4 +23,5 @@ class ClaimRepository {
   }
 }
 
-export default ClaimRepository
+export default new ClaimRepository;
+export {ClaimRepository};

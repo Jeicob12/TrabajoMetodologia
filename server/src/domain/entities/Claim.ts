@@ -34,7 +34,7 @@ export class Claim {
     this.cloneOf = cloneOf
   }
 
-  public static create (ip: string, owner: Visitor, tittle: string, description: string, category: Category, location: string, createdAt: Date, cloneOf: Claim): Claim {
+  public static create (owner: Visitor, tittle: string, description: string, category: Category, location: string, createdAt: Date, cloneOf: Claim): Claim {
     const id = v4()
     const claim = new Claim(id, owner, tittle, description, category, location, createdAt, cloneOf)
 

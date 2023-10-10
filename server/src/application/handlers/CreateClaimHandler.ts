@@ -39,7 +39,7 @@ class CreateClaimHandler {
       throw new Error('the pin does not match')
     }
 
-    let category = await this.categoryRepository.findOneById(command.getCategory());
+    let category = await this.categoryRepository.findOneById(command.getCategoryId());
     if (!category)
     {
       throw new Error('category not found')

@@ -62,7 +62,7 @@ class CreateClaimCommand {
     return this.description
   }
 
-  public getCategory (): string {
+  public getCategoryId (): string {
     return this.category
   }
 

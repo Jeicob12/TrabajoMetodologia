@@ -1,73 +1,59 @@
-// import { Claim } from '../../../src/domain/entities/Claim'
+
+import { Claim } from 'domain/entities/Claim';
+
 import CreateClaimCommand from '../../../src/application/commands/CreateClaimCommand'
-// import accommodationRepository from '../../../infrastructure/repositories/mongodb/accomodation.repository';
-// import { AccommodationRepository } from '../../../infrastructure/repositories/mongodb/accomodation.repository';
-// import bookingRepository from '../../../infrastructure/repositories/mongodb/booking.repository';
-// import passengerRepository from '../../../infrastructure/repositories/mongodb/passenger.repository';
-// import { PassengerRepository } from '../../../infrastructure/repositories/mongodb/passenger.repository';
-// import Visitor from '../../../domain/entities/Visitor'
+
+import { ClaimRepository } from 'infrastructure/repositories/ClaimRepository';
+import claimRepository from 'infrastructure/repositories/ClaimRepository';
+
+import {VisitorRepository} from 'infrastructure/repositories/VisitorRepository';
+import visitorRepository from 'infrastructure/repositories/VisitorRepository';
+
+import categoryRepository from 'infrastructure/repositories/CategoryRepository';
+import { CategoryRepository } from 'infrastructure/repositories/CategoryRepository';
+
 
 class CreateClaimHandler {
-//   private passengerRepository: PassengerRepository;
-//   private accommodationRepository: AccommodationRepository;
+  private claimRepository : ClaimRepository;
+  private visitorRepository : VisitorRepository;
+  private categoryRepository : CategoryRepository;
 
-  //   public constructor(
-  //     passengerRepository: PassengerRepository,
-  //     accommodationRepository: AccommodationRepository
-  //   ) {
-  //     this.passengerRepository = passengerRepository;
-  //     this.accommodationRepository = accommodationRepository;
-  //   }
+  public constructor( claimRepository: ClaimRepository, visitorRepository: VisitorRepository, categoryRepository: CategoryRepository)
+  {
+    this.claimRepository = claimRepository;
+    this.visitorRepository = visitorRepository;
+    this.categoryRepository = categoryRepository;
+  }
 
   public async execute (command: CreateClaimCommand): Promise<void> {
-    if (!command.getOwner().includes(command.getId())) {
-      throw new Error('Owner must be in passengers list')
+
+    let visitor = await this.visitorRepository.findOneById(command.getOwnerId());
+
+    if (!visitor)
+    {
+      throw new Error('visitor not found')
     }
 
-    if (command.getCreatedAt() > command.getCloneOf()) {
-      throw new Error('(From) date must be before (to) date')
+    if(!visitor.pinMatch(command.getPin()))
+    {
+      throw new Error('the pin does not match')
     }
 
-    // const owner = await this.passengerRepository.findOneById(
-    //   command.getOwnerId()
-    // );
+    let category = await this.categoryRepository.findOneById(command.getCategoryId());
+    if (!category)
+    {
+      throw new Error('category not found')
+    }
+    let title = command.getTittle();
+    let description = command.getDescription();
+    let location = command.getLocation();
+    let createdAt = command.getCreatedAt();
+    let cloneOf = command.getCloneOf();
 
-    // if (!owner) {
-    //   throw new Error('Owner does not exist');
-    // }
+    let claim = Claim.create(visitor, title, description, category, location, createdAt, cloneOf);
 
-    // const passengers = command.getPassengerIds();
-    // const passengersFromDb: Passenger[] = [];
-    // for (let i = 0; i < passengers.length; i++) {
-    //   const passenger = await this.passengerRepository.findOneById(passengers[i]);
-    //   if (!passenger) {
-    //     throw new Error('Passenger does not exist');
-    //   } else {
-    //     passengersFromDb.push(passenger);
-    //   }
-    // }
-
-    // const accommodation = await this.accommodationRepository.findOneById(
-    //   command.getAccomodationId()
-    // );
-
-    // if (!accommodation) {
-    //   throw new Error('Accommodation does not exist');
-    // }
-
-    // const booking = Booking.create(
-    //   owner,
-    //   passengersFromDb,
-    //   accommodation,
-    //   command.getFrom(),
-    //   command.getTo()
-    // );
-
-    // await bookingRepository.save(booking);
+    await this.claimRepository.save(claim);
   }
 }
 
-export default new CreateClaimHandler() // (
-//   passengerRepository,
-//   accommodationRepository
-// );
+export default new CreateClaimHandler(claimRepository , visitorRepository , categoryRepository );

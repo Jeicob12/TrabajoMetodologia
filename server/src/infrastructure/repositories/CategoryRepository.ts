@@ -26,4 +26,5 @@ class CategoryRepository {
     return this.categories
   };
 }
-export default CategoryRepository
+export default new CategoryRepository;
+export  {CategoryRepository};

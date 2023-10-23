@@ -16,7 +16,7 @@ class LikeAction {
       return res.status(201).json(
         { message: 'Dislike registered successfully' }
       )
-    } catch (error) {
+    } catch (error : any) {
       res.status(400).json(
         { message: error.message }
       )

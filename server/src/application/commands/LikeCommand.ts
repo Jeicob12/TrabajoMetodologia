@@ -1,28 +1,21 @@
 class LikeCommand {
-  private readonly id: string
-  private readonly ip: string // Revisar
-  private readonly nickName: string // Revisar
-  public constructor (
-    id: string,
-    ip: string, // Revisar
-    nickName: string /// /Revisar
-
+  public constructor(
+    private ownerId: string,
+    private pin: string,
+    private claimId: string,
   ) {
-    this.id = id
-    this.ip = ip // Revisar
-    this.nickName = nickName // Revisar
   }
 
-  public getId (): string {
-    return this.id
+  public getClaim(): string {
+    return this.claimId;
   }
 
-  public getIp (): string { // Revisar
-    return this.ip
+  public getPin(): string {
+    return this.pin
   }
 
-  public getNickName (): string { // Revisar
-    return this.nickName
+  public getOwner(): string {
+    return this.ownerId;
   }
 }
 

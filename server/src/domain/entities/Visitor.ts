@@ -30,6 +30,13 @@ export class Visitor {
   public getId (): string {
     return this.id
   }
+  public getIp(): string {
+    return this.ip;
+  }
+
+  public getNickName(): string {
+    return this.nickName;
+  }
   public pinMatch (pin : string): boolean {
     return pin === this.pin;
   }

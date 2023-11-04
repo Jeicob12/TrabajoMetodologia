@@ -18,7 +18,7 @@ export class Category {
     this.color = color
   }
 
-  public static create (ip: string, name: string, color: string) : Category {
+  public static create (name: string, color: string) : Category {
     const id = v4()
     const category = new Category(id, name, color)
 
@@ -28,5 +28,12 @@ export class Category {
 
   public getId (): string {
     return this.id
+  }
+  public getName(): string {
+    return this.name;
+  }
+
+  public getColor(): string {
+    return this.color;
   }
 }

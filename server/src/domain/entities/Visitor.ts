@@ -11,7 +11,7 @@ export class Visitor {
     id: string,
     ip: string,
     nickName: string,
-    pin: string,
+    pin: string
   ) {
     this.id = id
     this.ip = ip
@@ -30,14 +30,16 @@ export class Visitor {
   public getId (): string {
     return this.id
   }
-  public getIp(): string {
-    return this.ip;
+
+  public pinMatch (pin : string): boolean {
+    return pin === this.pin
   }
 
-  public getNickName(): string {
-    return this.nickName;
+  public getIp (): string {
+    return this.ip
   }
-  public pinMatch (pin : string): boolean {
-    return pin === this.pin;
+
+  public getNickName (): string {
+    return this.nickName
   }
 }

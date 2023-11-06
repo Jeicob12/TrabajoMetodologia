@@ -1,6 +1,3 @@
-// import { Nullable } from '../valueObjects/Nullable'
-// import { Visitor } from './Visitor'
-// import { Claim } from './Claim'
 import { v4 } from 'uuid'
 
 export class Category {
@@ -22,18 +19,18 @@ export class Category {
     const id = v4()
     const category = new Category(id, name, color)
 
-    // Add record event for open/closed principle
     return category
   }
 
   public getId (): string {
     return this.id
   }
-  public getName(): string {
-    return this.name;
+
+  public getName (): string {
+    return this.name
   }
 
-  public getColor(): string {
-    return this.color;
+  public getColor (): string {
+    return this.color
   }
 }

@@ -4,13 +4,14 @@ import CreateVisitorHandler from '../../../src/application/handlers/CreateVisito
 
 class CreateVisitorAction {
   public async run (req: Request, res: Response) {
-    const { id, ip, nickName } = req.body
+    const { id, ip, nickName, pin } = req.body
 
     try {
       const command = new CreateVisitorCommand(
         id,
         ip,
-        nickName
+        nickName,
+        pin
       )
       await CreateVisitorHandler.execute(command)
       return res.status(201).json(

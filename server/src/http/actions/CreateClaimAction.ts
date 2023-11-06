@@ -3,8 +3,8 @@ import CreateClaimCommand from '../../../src/application/commands/CreateClaimCom
 import CreateClaimHandler from '../../../src/application/handlers/CreateClaimHandler'
 
 class CreateClaimAction {
-  public async run (req: Request, res: Response) {
-    const { id, owner, tittle, description, category, location, createdAt, cloneOf, pin } = req.body
+  public async run (_req: Request, res: Response) {
+    const { id, owner, tittle, description, category, location, pin } = _req.body
 
     try {
       const command = new CreateClaimCommand(
@@ -14,9 +14,7 @@ class CreateClaimAction {
         description,
         category,
         location,
-        createdAt,
-        cloneOf,
-        pin,
+        pin
       )
       await CreateClaimHandler.execute(command)
       return res.status(201).json(

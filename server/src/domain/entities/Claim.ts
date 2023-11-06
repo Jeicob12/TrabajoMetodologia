@@ -1,22 +1,21 @@
-import {Visitor} from './Visitor'
-import {Category} from './Category'
-import {v4} from 'uuid'
-
-// import { Nullable } from '../valueObjects/Nullable'
+import { Visitor } from './Visitor'
+import { Category } from './Category'
+import { v4 } from 'uuid'
 
 export class Claim {
   private id: string
   private owner: Visitor
-  private title: string
+  private tittle: string
   private description: string
   private category: Category
   private location: string
   private createdAt: Date
   // eslint-disable-next-line no-use-before-define
-  private cloneOf?: Claim
-  private likes: string[] = []
+  private cloneOf: Claim | null
+  private approvalCount: number // Nuevo - Contador de aprobaciones.
+  private reports: { reason: string; timestamp: Date }[] // Nuevo para guardar los ReportClaim, revisar.
 
-  private constructor(
+  private constructor (
     id: string,
     owner: Visitor,
     tittle: string,
@@ -24,71 +23,69 @@ export class Claim {
     category: Category,
     location: string,
     createdAt: Date,
+    cloneOf: Claim | null,
+    approvalCount: number // Nuevo
   ) {
     this.id = id
     this.owner = owner
-    this.title = tittle
+    this.tittle = tittle
     this.description = description
     this.category = category
     this.location = location
     this.createdAt = createdAt
+    this.cloneOf = cloneOf
+    this.approvalCount = approvalCount // Nuevo
+    this.reports = [] // Nuevo para guardar los ReportClaim, revisar.
   }
 
-  public static create(
-    owner: Visitor,
-    title: string,
-    description: string,
-    category: Category,
-    location: string,
-  ): Claim {
+  public static create (owner: Visitor, tittle: string, description: string, category: Category, location: string): Claim {
     const id = v4()
-    const claim = new Claim(id, owner, title, description, category, location, new Date())
+    const claim = new Claim(id, owner, tittle, description, category, location, new Date(), null, 0)
 
-    // Add record event for open/closed principle
     return claim
   }
 
-  public getId(): string {
+  public getId (): string {
     return this.id
   }
 
-  addLike(id: string) {
-    if (this.hasVisitorLiked(id)) {
-      throw new Error('Visitor has already liked this claim.')
-    }
-
-    this.likes.push(id)
+  public getOwner (): Visitor {
+    return this.owner
   }
 
-  public hasVisitorLiked(id: string) {
-    return this.likes.includes(id);
+  public getTittle (): string {
+    return this.tittle
   }
 
-  public getOwner(): Visitor {
-    return this.owner;
+  public getDescription (): string {
+    return this.description
   }
 
-  public getTitle(): string {
-    return this.title;
+  public getCategory (): Category {
+    return this.category
   }
 
-  public getDescripcion(): string {
-    return this.description;
+  public getLocation (): string {
+    return this.location
   }
 
-  public getCategory(): Category {
-    return this.category;
+  public getCreatedAt (): Date {
+    return this.createdAt
   }
 
-  public getLocation(): string {
-    return this.location;
+  public getcloneOf (): Claim | null {
+    return this.cloneOf
   }
 
-  public getCreatedAt(): Date {
-    return this.createdAt;
+  public approve () {
+    this.approvalCount++
   }
 
-  public getCloneOf(): Claim | undefined {
-    return this.cloneOf;
+  public getApprovalCount (): number {
+    return this.approvalCount
+  }
+
+  public addReport (report: { reason: string; timestamp: Date }): void {
+    this.reports.push(report)
   }
 }

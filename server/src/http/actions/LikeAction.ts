@@ -12,7 +12,8 @@ class LikeAction {
         ip,
         nickName
       )
-      await LikeHandler.execute(command)
+      const likeHandler = new LikeHandler(command)
+      await likeHandler.handleLike()
       return res.status(201).json(
         { message: 'Like registered successfully' }
       )

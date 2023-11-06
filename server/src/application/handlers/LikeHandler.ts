@@ -1,39 +1,27 @@
-import claimRepository, {ClaimRepository} from "../../infrastructure/repositories/ClaimRepository";
-import visitorRepository, {VisitorRepository} from "../../infrastructure/repositories/VisitorRepository";
-import LikeCommand from "../commands/LikeCommand";
+import LikeCommand from 'application/commands/LikeCommand'
 
-export class LikeHandler {
-  private visitorRepository: VisitorRepository;
-  private claimRepository: ClaimRepository;
+class LikeHandler {
+  private likeCommand: LikeCommand
 
-  public constructor(
-    visitorRepository: VisitorRepository,
-    claimRepository: ClaimRepository,
-  ){
-    this.visitorRepository = visitorRepository;
-    this.claimRepository = claimRepository;
+  constructor (likeCommand: LikeCommand) {
+    this.likeCommand = likeCommand
   }
 
-  public async execute(command: LikeCommand): Promise<void> {
-    const owner = await this.visitorRepository.findOneById(command.getOwner());
+  public handleLike (): void {
+    const id = this.likeCommand.getId()
+    const ip = this.likeCommand.getIp()
+    const nickName = this.likeCommand.getNickName()
 
-    if (!owner) {
-      throw new Error('Owner does not exist');
-    }
+    console.log(`Procesando like para ID: ${id}, IP: ${ip}, Nickname: ${nickName}`)
 
-    if (!owner.pinMatch(command.getPin())) {
-      throw new Error('Pin does not match');
-    }
+    // Dar el "me gusta"
 
-    const claim = await this.claimRepository.findOneById(command.getClaim());
+    this.likeCommand.like()
+  }
 
-    if (!claim) {
-      throw new Error('Claim not found');
-    }
-
-    claim.addLike(command.getOwner());
-
-    await this.claimRepository.save(claim);
+  public getLikesCount (): number {
+    return this.likeCommand.getLikesCount()
   }
 }
-export default new LikeHandler(visitorRepository, claimRepository)
+
+export default LikeHandler

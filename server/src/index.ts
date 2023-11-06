@@ -4,6 +4,9 @@ import cors from 'cors';
 import { log } from 'debug';
 import expressWinston from 'express-winston';
 import winston from 'winston';
+import VisitorRoutes from './http/routes/VisitorRoutes';
+import ClaimRoutes from './http/routes/ClaimRoutes';
+
 
 const app: express.Application = express();
 
@@ -27,6 +30,9 @@ const routes: Array<CommonRoutes> = [];
 app.use(cors());
 app.use(express.json());
 
+
+routes.push(new VisitorRoutes(app) );
+routes.push(new ClaimRoutes(app) );
 // Add router
 // you should add your routes here...
 //routes.push(new PassengerRoutes(app));

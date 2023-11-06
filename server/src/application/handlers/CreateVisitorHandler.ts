@@ -1,6 +1,6 @@
-import visitorRepository, { VisitorRepository } from 'infrastructure/repositories/VisitorRepository'
-import CreateVisitorCommand from 'application/commands/CreateVisitorCommand'
-import { Visitor } from 'domain/entities/Visitor'
+import visitorRepository, { VisitorRepository } from '../../infrastructure/repositories/VisitorRepository'
+import CreateVisitorCommand from '../commands/CreateVisitorCommand'
+import { Visitor } from '../../domain/entities/Visitor'
 
 class CreateVisitorHandler {
   private visitorRepository: VisitorRepository

@@ -27,11 +27,11 @@ class LikeCommand {
     return this.nickName
   }
 
-  public like (): void { // Nuevo: método para dar "me gusta"
+  public like (): void { 
     this.likes++
   }
 
-  public getLikesCount (): number { // Nuevo: método para obtener la cantidad de likes
+  public getLikesCount (): number { 
     return this.likes
   }
 }

@@ -18,7 +18,7 @@ class CreateVisitorAction {
         { message: 'Visitor created successfully' }
       )
     } catch (error : any) {
-      res.status(400).json(
+      return res.status(400).json(
         { message: error.message }
       )
     }

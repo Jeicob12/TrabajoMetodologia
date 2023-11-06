@@ -1,5 +1,5 @@
-import { Visitor } from './Visitor'
-import { Category } from './Category'
+import { Visitor } from '../entities/Visitor'
+import { Category } from '../entities/Category'
 import { v4 } from 'uuid'
 
 export class Claim {

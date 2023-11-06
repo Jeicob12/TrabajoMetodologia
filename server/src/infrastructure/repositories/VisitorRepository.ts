@@ -1,4 +1,5 @@
-import { Visitor } from '../../domain/entities/Visitor'
+import { Visitor } from "../../domain/entities/Visitor"
+
 
 class VisitorRepository {
   private visitors : Visitor[]
@@ -23,5 +24,5 @@ class VisitorRepository {
   }
 }
 
-export default new VisitorRepository
-export {VisitorRepository} 
+export default new VisitorRepository()
+export { VisitorRepository }

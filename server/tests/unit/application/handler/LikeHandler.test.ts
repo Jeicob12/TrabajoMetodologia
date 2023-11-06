@@ -2,7 +2,7 @@ import {Visitor} from "../../../../src/domain/entities/Visitor";
 import {Claim} from "../../../../src/domain/entities/Claim";
 import {Category} from "../../../../src/domain/entities/Category";
 
-import {LikeHandler} from "../../../../src/application/handlers/LikeHandler";
+import LikeHandler from "application/handlers/LikeHandler";
 import LikeCommand from "../../../../src/application/commands/LikeCommand";
 
 import {VisitorRepository} from "../../../../src/infrastructure/repositories/VisitorRepository";

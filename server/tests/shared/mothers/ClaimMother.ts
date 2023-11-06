@@ -25,7 +25,7 @@ export class ClaimMother {
       'una ubicacion'
     )
     strings.forEach((id ) => {
-      claim.addLike(id)
+      claim.approve(id)
     })
 
     return claim;

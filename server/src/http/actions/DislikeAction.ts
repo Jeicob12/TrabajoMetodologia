@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import DislikeCommand from '../../../src/application/commands/DislikeCommand'
 import DislikeHandler from '../../../src/application/handlers/DislikeHandler'
 
-class LikeAction {
+class DislikeAction {
   public async run (req: Request, res: Response) {
     const { id, ip, nickName } = req.body
 
@@ -12,16 +12,17 @@ class LikeAction {
         ip,
         nickName
       )
-      await DislikeHandler.execute(command)
+      const likeHandler = new DislikeHandler(command)
+      await likeHandler.handleDislike()
       return res.status(201).json(
         { message: 'Dislike registered successfully' }
       )
     } catch (error : any) {
-      res.status(400).json(
+      return res.status(400).json(
         { message: error.message }
       )
     }
   }
 }
 
-export default new LikeAction()
+export default new DislikeAction()

@@ -1,20 +1,17 @@
 import { Application } from 'express';
 import CommonRoutes from './common.routes';
 import GetCategoriesAction from '../actions/GetCategoriesAction';
-import { CategoryRepository } from 'infrastructure/repositories/CategoryRepository';
-
+import CreateCategoryAction from '../actions/CreateCategoryAction';
 class CategoryRoutes extends CommonRoutes {
-  private categoryRepository: CategoryRepository;
-  private getCategoriesAction: GetCategoriesAction;
 
-  public constructor(app: Application, categoryRepository: CategoryRepository) {
+  public constructor(app: Application) {
     super(app, 'Category');
-    this.categoryRepository = categoryRepository;
-    this.getCategoriesAction = new GetCategoriesAction(this.categoryRepository);
+
   }
 
   public setUpRoutes(): Application {
-    this.app.post('/categories', this.getCategoriesAction.run);
+    this.app.get('/categories', GetCategoriesAction.run);
+    this.app.post('/categories',CreateCategoryAction.run);
     return this.app;
   }
 }

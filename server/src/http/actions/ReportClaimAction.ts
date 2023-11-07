@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import ReportClaimCommand from 'application/commands/ReportClaimCommand'
-import ReportClaimHandler from 'application/handlers/ReportClaimHandler'
+import ReportClaimCommand from '../../application/commands/ReportClaimCommand'
+import ReportClaimHandler from '../../application/handlers/ReportClaimHandler'
 
 class ReportClaimAction {
   public async run (req: Request, res: Response) {

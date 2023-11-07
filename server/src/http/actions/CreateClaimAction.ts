@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import CreateClaimCommand from '../../../src/application/commands/CreateClaimCommand'
-import CreateClaimHandler from '../../../src/application/handlers/CreateClaimHandler'
+import CreateClaimCommand from '../../application/commands/CreateClaimCommand'
+import CreateClaimHandler from '../../application/handlers/CreateClaimHandler'
 
 class CreateClaimAction {
   public async run (_req: Request, res: Response) {

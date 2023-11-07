@@ -6,6 +6,7 @@ import expressWinston from 'express-winston';
 import winston from 'winston';
 import VisitorRoutes from './http/routes/VisitorRoutes';
 import ClaimRoutes from './http/routes/ClaimRoutes';
+import CategoryRoutes from './http/routes/CategoryRoutes';
 
 
 const app: express.Application = express();
@@ -33,6 +34,7 @@ app.use(express.json());
 
 routes.push(new VisitorRoutes(app) );
 routes.push(new ClaimRoutes(app) );
+routes.push(new CategoryRoutes(app) );
 // Add router
 // you should add your routes here...
 //routes.push(new PassengerRoutes(app));

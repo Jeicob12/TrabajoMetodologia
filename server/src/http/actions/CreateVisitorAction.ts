@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
-import CreateVisitorCommand from '../../../src/application/commands/CreateVisitorCommand'
-import CreateVisitorHandler from '../../../src/application/handlers/CreateVisitorHandler'
+import CreateVisitorCommand from '../../application/commands/CreateVisitorCommand'
+import CreateVisitorHandler from '../../application/handlers/CreateVisitorHandler'
 
-class CreateVisitorAction {
+class CreateVisitorAction{
   public async run (req: Request, res: Response) {
     const { id, ip, nickName, pin } = req.body
 

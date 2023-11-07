@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import ClaimRepository from 'infrastructure/repositories/ClaimRepository'
+import ClaimRepository from '../../infrastructure/repositories/ClaimRepository'
 
 class GetLastClaimsAction {
   public async run (_req: Request, res: Response) {

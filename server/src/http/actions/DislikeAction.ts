@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import DislikeCommand from '../../../src/application/commands/DislikeCommand'
-import DislikeHandler from '../../../src/application/handlers/DislikeHandler'
+import DislikeCommand from '../../application/commands/DislikeCommand'
+import DislikeHandler from '../../application/handlers/DislikeHandler'
 
 class DislikeAction {
   public async run (req: Request, res: Response) {

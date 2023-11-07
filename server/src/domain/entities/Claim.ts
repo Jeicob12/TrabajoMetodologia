@@ -1,5 +1,5 @@
-import { Visitor } from '../entities/Visitor'
-import { Category } from '../entities/Category'
+import { Visitor } from './Visitor'
+import { Category } from './Category'
 import { v4 } from 'uuid'
 
 export class Claim {
@@ -10,7 +10,6 @@ export class Claim {
   private category: Category
   private location: string
   private createdAt: Date
-  // eslint-disable-next-line no-use-before-define
   private cloneOf: Claim | null
   private approvalCount: number // Nuevo - Contador de aprobaciones.
   private reports: { reason: string; timestamp: Date }[] // Nuevo para guardar los ReportClaim, revisar.

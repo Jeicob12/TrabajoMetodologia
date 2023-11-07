@@ -1,8 +1,8 @@
 import { Application } from 'express'
 import CommonRoutes from './common.routes'
 import CreateClaimAction from '../actions/CreateClaimAction'
-import GetOnFireClaimActions from 'http/actions/GetOnFireClaimActions'
-import GetLastClaimsAction from 'http/actions/GetLastClaimsAction'
+import GetOnFireClaimActions from '../actions/GetOnFireClaimActions'
+import GetLastClaimsAction from '../actions/GetLastClaimsAction'
 class ClaimRoutes extends CommonRoutes {
   public constructor (app: Application) {
     super(app, 'Claim')

@@ -1,8 +1,8 @@
-import { Claim } from 'domain/entities/Claim'
+import { Claim } from '../../domain/entities/Claim'
 import CreateClaimCommand from '../../../src/application/commands/CreateClaimCommand'
-import claimRepository, { ClaimRepository } from 'infrastructure/repositories/ClaimRepository'
-import visitorRepository, { VisitorRepository } from 'infrastructure/repositories/VisitorRepository'
-import categoryRepository, { CategoryRepository } from 'infrastructure/repositories/CategoryRepository'
+import claimRepository, { ClaimRepository } from '../../infrastructure/repositories/ClaimRepository'
+import visitorRepository, { VisitorRepository } from '../../infrastructure/repositories/VisitorRepository'
+import categoryRepository, { CategoryRepository } from '../../infrastructure/repositories/CategoryRepository'
 
 class CreateClaimHandler {
   private claimRepository : ClaimRepository

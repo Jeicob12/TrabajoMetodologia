@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
-import ClaimRepository from 'infrastructure/repositories/ClaimRepository'
+import ClaimRepository from '../../infrastructure/repositories/ClaimRepository'
 
 class GetOnFireClaimsAction {
-  public async run (req: Request, res: Response) {
+  public async run (_req: Request, res: Response) {
     try {
       // Obtener las 5 principales reclamaciones "on fire" desde el repositorio
       const onFireClaims = await ClaimRepository.getTopOnFireClaims()
